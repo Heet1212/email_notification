@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ job_name | default("Data Transfer Job") }} - {{ job_status | default("Unknown Status") }}</title>
+</head>
+<body>
+    <h2>Job {{ job_name | default("Data Transfer Job") }} - {{ job_status | default("Unknown Status") }}</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>Job ID</th>
+            <td>{{ job_id | default("N/A") }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ job_status | default("Unknown") }}</td>
+        </tr>
+        <tr>
+            <th>Start Time</th>
+            <td>{{ job_started_on | default("N/A") }}</td>
+        </tr>
+        <tr>
+            <th>End Time</th>
+            <td>{{ job_ended_on | default("N/A") }}</td>
+        </tr>
+        <tr>
+            <th>Row Count</th>
+            <td>{{ row_count | default("N/A") }}</td>
+        </tr>
+        <tr>
+            <th>Balance Sum</th>
+            <td>{{ balance_sum | default("N/A") }}</td>
+        </tr>
+        <tr>
+            <th>Source Table</th>
+            <td>{{ source_table | default("N/A") }}</td>
+        </tr>
+        <tr>
+            <th>Target Table</th>
+            <td>{{ target_table | default("N/A") }}</td>
+        </tr>
+    </table>
+
+    <h3>Sample Data (First 10 Rows from Target Table):</h3>
+    {% if sample_rows_html %}
+        {{ sample_rows_html | safe }}
+    {% else %}
+        <p>No sample data available.</p>
+    {% endif %}
+
+    {% if job_status == "Failed" %}
+        <p><strong>Error Message:</strong> {{ error_message | default("N/A") }}</p>
+    {% endif %}
+</body>
+</html>
